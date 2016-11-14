@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+<link href="assets/css/style.css" rel="stylesheet" type="text/css" />
+<title>Cart</title>
+
+</head>
+<script type="text/javascript" src="assets/js/angular.min.js"></script>
+<script type="text/javascript" src="/assets/js/angular-route.js"></script>
+<script type="text/javascript" src="assets/js/app.js"></script>
+<script type="text/javascript" src="assets/js/controller.js"></script>
+
+<body>
+
+	<div class="container" data-ng-app="productView">
+		<!-- Wrapper -->
+		<div id="wrapper">
+
+			<!-- Header -->
+			<header id="header">
+				<nav class="navbar navbar-default navbar-xs" role="navigation">
+					<!-- Brand and toggle get grouped for better mobile display -->
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle" data-toggle="collapse"
+							data-target="#bs-example-navbar-collapse-1">
+							<span class="sr-only">Toggle navigation</span> <span
+								class="icon-bar"></span> <span class="icon-bar"></span> <span
+								class="icon-bar"></span>
+						</button>
+
+					</div>
+
+					<!-- Collect the nav links, forms, and other content for toggling -->
+					<div class="collapse navbar-collapse"
+						id="bs-example-navbar-collapse-1">
+						<ul class="nav navbar-nav">
+							<!-- li><a href="#"><i class="glyphicon glyphicon-adjust"></i></a></li>
+							<li><a href="#"><i class="glyphicon glyphicon-bell"></i></a></li>
+							<li><a href="#"><i class="glyphicon glyphicon-user"></i></a></li-->
+							<li ng-controller="cartCtrl" class="col-md-12 text-right"><a
+								href="http://localhost:8080/Webshop/cart.html">
+									{{countCartItems()}} <i
+									class="glyphicon glyphicon-shopping-cart"></i>
+							</a></li>
+
+						</ul>
+					</div>
+					<!-- /.navbar-collapse -->
+				</nav>
+
+				<div class="jumbotron jum-b">
+					<div class="container">
+						<h1 style="text-align: center;">
+							Online <em>Pet</em> Supplies! <br></br> <span class="avatar"><img
+								src="images/avatar.jpg" alt="" /></span>
+						</h1>
+						<p style="text-align: center;">
+							Welkom bij <strong>Pet Supplies Web Store</strong>, de plek op
+							het net om op een snelle en simpele manier de benodigde spullen
+							voor onze dieren vrienden te kopen
+						</p>
+					</div>
+				</div>
+
+				<h1></h1>
+				<!--  >ul class="icons">
+							<li><a href="#" class="icon style2 fa-twitter"><span class="label">Twitter</span></a></li>
+							<li><a href="#" class="icon style2 fa-facebook"><span class="label">Facebook</span></a></li>
+							<li><a href="#" class="icon style2 fa-instagram"><span class="label">Instagram</span></a></li>
+							<li><a href="#" class="icon style2 fa-500px"><span class="label">500px</span></a></li>
+							<li><a href="#" class="icon style2 fa-envelope-o"><span class="label">Email</span></a></li>
+						</ul-->
+			</header>
+
+			<!-- Main -->
+			<section id="main">
+
+				<!-- Thumbnails -->
+				<section class="thumbnails">
+					<div data-ng-app="productView" data-ng-controller="cartCtrl">
+
+						<table style="width: 100%">
+							<tr>
+								<th></th>
+								<th>Product</th>
+								<th>Aantal</th>
+								<th>Prijs</th>
+								<th></th>
+							</tr>
+							<tr data-ng-repeat="x in Products">
+								<td><img src="{{x.picture}}"
+									style="width: 100px; height: 100px;" alt=""></td>
+								<td>{{x.name}}</td>
+								<td>
+									<form name="myForm" data-ng-controller="numberInputCtrl"
+										action="">
+										<label>Aantal: <input type="number" name="input"
+											data-ng-model="x.amount" ng-change="{{totalPrice()}}"
+											required>
+										</label>
+										<div role="alert">
+											<span class="error"
+												data-ng-show="myForm.input.$error.pattern"> Not a
+												valid number!</span>
+										</div>
+
+									</form>
+								</td>
+								<td>{{costs(x)}}</td>
+								<td><button data-ng-click="deleteProduct(x)">Verwijderen</button></td>
+							</tr>
+						</table>
+						<p>Totaal bedrag: {{totalPrice()}}</p>
+
+
+
+					</div>
+
+
+				</section>
+
+			</section>
+
+			<!-- Footer -->
+			<footer id="footer">
+
+				<div class="container">
+					<p style="text-align: center;">
+						Voor aankoop, stuur een mail naar de benedenstaande email adres
+						met de producten en hun aantal. <br></br> Gelieve uw contact
+						informatie ook te vermelden. <br></br> <a
+							href="mailto:info@petsupplies.com">info@petsupplies.com</a>
+					</p>
+
+				</div>
+
+
+
+			</footer>
+
+		</div>
+	</div>
+</body>
+
+
+
+</html>
