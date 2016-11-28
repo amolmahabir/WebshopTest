@@ -1,5 +1,5 @@
 @CHARSET "ISO-8859-1";
-@import url(http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css);
+
 .col-item
 {
     border: 1px solid #E1E1E1;
@@ -51,7 +51,7 @@
 
 .price-text-color
 {
-    color: #219FD1;
+    color: #006800;
 }
 
 .col-item .info .rating
@@ -207,8 +207,74 @@ em {
 			}
 
 body {
-		background-color: #000;
+		background-color: #525252;
 		background-image: url("../../images/bg.jpg");
 		background-size: cover;
 		background-position: top center;
 	}
+	
+
+
+.register-form{
+    font-size: 16px;
+   left: 50%;
+    top: 50%;
+    position: relative;
+    -webkit-transform: translate3d(-50%, -50%, 0);
+    -moz-transform: translate3d(-50%, -50%, 0);
+    transform: translate3d(-50%, -50%, 0);
+}
+
+.regbutton{    
+    height: 50px;
+    width: 200px;
+    background-color:tomato;
+    border-radius: 0px;
+    font-size: 18px;
+    color:white;
+    border: none !important;
+    margin-bottom: 5px;
+}
+.regbutton:hover{    
+    color: white;
+    background-color:#aa422f;
+}
+.regbutton:active{    
+    color: white;
+    background-color:#aa422f;
+}
+.logbutton{    
+    height: 50px;
+    width: 200px;
+    background-color:yellowgreen;
+    border-radius: 0px;
+    font-size: 18px;
+    color:white;
+    border: none !important;
+    margin-bottom: 5px;
+    margin-right: 0em;
+}
+.logbutton:hover{    
+    color: white;
+    background-color:darkolivegreen;
+}
+.logbutton:active{    
+    color: white;
+    background-color:darkolivegreen;
+    
+}
+
+.register-form label{
+    color: aliceblue;
+    
+}
+.register-form input{
+    margin-bottom: 5px;
+    width: 430px;
+    height: 40px;
+    border-radius: 0px;
+}
+
+.container-fluid{
+	margin: 15em 25em 10em 25em;
+}

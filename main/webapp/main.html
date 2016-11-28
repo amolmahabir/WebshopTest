@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<!-- Main -->
+	<section class="thumbnails">
+		<div class="row" data-ng-controller="productCtrl">
+			<section style="padding-bottom: 10em; position: relative;">
+				<ul class="nav navbar-nav">
+					<!-- li><a href="#"><i class="glyphicon glyphicon-adjust"></i></a></li>
+							<li><a href="#"><i class="glyphicon glyphicon-bell"></i></a></li>
+							<li><a href="#"><i class="glyphicon glyphicon-user"></i></a></li-->
+					<li><a href="http://localhost:8080/Webshop/index2.html#/cart"
+						data-ng-controller="cartCtrl"> {{countCartItems()}} <i
+							class="glyphicon glyphicon-shopping-cart"></i>
+					</a></li>
+					<li><button data-ng-click="setCategoryFilter('')">
+							Alle producten</button></li>
+					<li data-ng-repeat="c in getCategoryArray()">
+						<button data-ng-click="setCategoryFilter(c)">{{c}}</button>
+					</li>
+				</ul>
+				<select
+					data-ng-options="language | translate for language in ctrl.languages"
+					data-ng-model="ctrl.language"
+					data-ng-change="ctrl.updateLanguage()"></select> <select
+					data-ng-options="currency for currency in ctrl.currencies"
+					data-ng-model="ctrl.currency" data-ng-change="ctrl.setCurrency()"></select>
+			</section>
+			<br></br>
+			<div class="col-xs-12 col-sm-6 col-md-3"
+				data-ng-repeat="x in filteredProducts">
+				<div class="col-item">
+					<div class="post-img-content">
+						<img src="{{x.picture}}" class="img-responsive"
+							style="height: 200px;"> <span class="post-title"> </span>
+					</div>
+					<div class="info">
+						<div class="row">
+							<div class="price col-md-12">
+								<h5>{{x.name | translate}}</h5>
+								<p>{{x.description | translate}}</p>
+								<h5 class="price-text-color">{{x.price | currency:'€' }}</h5>
+							</div>
+						</div>
+						<div class="separator">
+							<p class="btn-add">
+								<i class="fa fa-shopping-cart"></i><a
+									data-ng-click="postProductToCart(x)" class="hidden-sm">Toevoegen
+									aan winkelwagen</a>
+							</p>
+						</div>
+						<div class="clearfix"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</body>
+</html>

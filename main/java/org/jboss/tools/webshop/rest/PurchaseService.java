@@ -1,3 +1,4 @@
+
 package org.jboss.tools.webshop.rest;
 
 import java.util.List;
@@ -17,64 +18,51 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriBuilder;
 import javax.ws.rs.core.Response.Status;
 
-import org.jboss.tools.webshop.model.CartItem;
+import org.jboss.tools.webshop.model.Purchase;
 
 
 
-@Path("/cart")
+@Path("/purchase")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 @Stateless
-public class CartService {
+public class PurchaseService  {
 
 	@Inject
 	private EntityManager em;
-	private List<CartItem> cartlist ;
+	private List<Purchase> purchase ;
 
 	@GET
 	public Response getProduct() {
-		List<CartItem> result = em.createQuery("SELECT c FROM CartItem c").getResultList();
-		cartlist = result;
-		System.out.println(cartlist);
+		List<Purchase> result = em.createQuery("SELECT p FROM purchase p").getResultList();
+		purchase = result;
+		System.out.println(purchase);
 		return Response.ok(result).build();
-		
+
 	}
 
 
 
 	@POST
 	@Consumes("application/json")
-	public Response create(CartItem entity) { //was Product entity
-		cartlist = em.createQuery("SELECT c FROM CartItem c").getResultList();
-		if (!cartlist.isEmpty()){
-			for(CartItem it:cartlist){
-				if (it.getName().equals(entity.getName())){
-					
-					
-					entity.setAmount(it.getAmount()+1);;
-					System.out.println(entity.getAmount());
-				} else System.out.println("Er gebeurt helemaal niks!");
-			}
-		}
-		
-		CartItem item = em.merge(entity);
-		
-		System.out.println(item.getName() + item.getAmount());
+	public Response create(Purchase entity) { //was Product entity
+		purchase = em.createQuery("SELECT p FROM purchase p").getResultList();
+		Purchase purch = em.merge(entity);
 		return Response.created(
 				UriBuilder.fromResource(CartService.class)
-				.path(String.valueOf(item.getId())).build()).build();
+				.path(String.valueOf(purch.getId())).build()).build();
 	}
 
 	@DELETE
 	@Path("/{id:[0-9]*}")
 	@Consumes("application/json")
 	public Response deleteById(@PathParam("id") Long id) {
-		CartItem entity = em.find(CartItem.class, id);
+		Purchase entity = em.find(Purchase.class, id);
 		if (entity == null) {
 			return Response.status(Status.NOT_FOUND).build();
 		}
 		em.remove(entity);
-		
+
 		return Response.noContent().build();
 	}
 

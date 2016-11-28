@@ -17,25 +17,25 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriBuilder;
 import javax.ws.rs.core.Response.Status;
 
-import org.jboss.tools.webshop.model.CartItem;
+import org.jboss.tools.webshop.model.Customer;
 
 
 
-@Path("/cart")
+@Path("/customer")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 @Stateless
-public class CartService {
+public class CustomerService {
 
 	@Inject
 	private EntityManager em;
-	private List<CartItem> cartlist ;
+	private List<Customer> customer ;
 
 	@GET
 	public Response getProduct() {
-		List<CartItem> result = em.createQuery("SELECT c FROM CartItem c").getResultList();
-		cartlist = result;
-		System.out.println(cartlist);
+		List<Customer> result = em.createQuery("SELECT c FROM customer c").getResultList();
+		customer = result;
+		System.out.println(customer);
 		return Response.ok(result).build();
 		
 	}
@@ -44,32 +44,21 @@ public class CartService {
 
 	@POST
 	@Consumes("application/json")
-	public Response create(CartItem entity) { //was Product entity
-		cartlist = em.createQuery("SELECT c FROM CartItem c").getResultList();
-		if (!cartlist.isEmpty()){
-			for(CartItem it:cartlist){
-				if (it.getName().equals(entity.getName())){
-					
-					
-					entity.setAmount(it.getAmount()+1);;
-					System.out.println(entity.getAmount());
-				} else System.out.println("Er gebeurt helemaal niks!");
-			}
-		}
+	public Response create(Customer entity) { //was Product entity
+		customer = em.createQuery("SELECT c FROM customer c").getResultList();
+		Customer cust = em.merge(entity);
 		
-		CartItem item = em.merge(entity);
-		
-		System.out.println(item.getName() + item.getAmount());
+		System.out.println(cust.getFirstname() + cust.getLastname());
 		return Response.created(
 				UriBuilder.fromResource(CartService.class)
-				.path(String.valueOf(item.getId())).build()).build();
+				.path(String.valueOf(cust.getId())).build()).build();
 	}
 
 	@DELETE
 	@Path("/{id:[0-9]*}")
 	@Consumes("application/json")
 	public Response deleteById(@PathParam("id") Long id) {
-		CartItem entity = em.find(CartItem.class, id);
+		Customer entity = em.find(Customer.class, id);
 		if (entity == null) {
 			return Response.status(Status.NOT_FOUND).build();
 		}

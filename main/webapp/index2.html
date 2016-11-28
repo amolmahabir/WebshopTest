@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>Pet Supplies Web Store</title>
+<title>Online Pet Supplies</title>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
@@ -13,64 +13,26 @@
 <script type="text/javascript" src="assets/js/angular-resource.min.js"></script>
 <script type="text/javascript" src="assets/js/app.js"></script>
 <script type="text/javascript" src="assets/js/controller.js"></script>
-
+<script type="text/javascript" src="assets/js/bower_components/angular-translate/angular-translate.js"></script>
+<link href="assets/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
 
 <body>
-
 	<div class="container" data-ng-app="productView">
-
-
-
 		<!-- Wrapper -->
-
-		<div id="wrapper" >
-
+		<div id="wrapper" data-ng-controller="productCtrl">
 			<!-- Header -->
 			<header id="header">
-				<nav class="navbar navbar-default navbar-xs" role="navigation">
-					<!-- Brand and toggle get grouped for better mobile display -->
-					<div class="navbar-header">
-						<button type="button" class="navbar-toggle" data-toggle="collapse"
-							data-target="#bs-example-navbar-collapse-1">
-							<span class="sr-only">Toggle navigation</span> <span
-								class="icon-bar"></span> <span class="icon-bar"></span> <span
-								class="icon-bar"></span>
-						</button>
-
-					</div>
-
-					<!-- Collect the nav links, forms, and other content for toggling -->
-					<div class="collapse navbar-collapse"
-						id="bs-example-navbar-collapse-1">
-						<ul class="nav navbar-nav">
-							<!-- li><a href="#"><i class="glyphicon glyphicon-adjust"></i></a></li>
-							<li><a href="#"><i class="glyphicon glyphicon-bell"></i></a></li>
-							<li><a href="#"><i class="glyphicon glyphicon-user"></i></a></li-->
-							<li data-ng-controller="cartCtrl" class="col-md-12 text-right"><a
-								href="http://localhost:8080/Webshop/cart.html">
-									{{countCartItems()}} <i
-									class="glyphicon glyphicon-shopping-cart"></i>
-							</a></li>
-
-						</ul>
-					</div>
-					<!-- /.navbar-collapse -->
-				</nav>
-
 				<div class="jumbotron jum-b">
 					<div class="container">
-						<h1 style="text-align: center;">
-							Online <em>Pet</em> Supplies! <br></br> <span class="avatar"><img
-								src="images/avatar.jpg" alt="" /></span>
+						<h1>
+							<a href="index2.html" style="text-align: center;"> 
+							{{'TITLE' | translate }} <br></br> <span class="avatar"><img
+									src="images/avatar.jpg" alt="" /></span>
+							</a>
 						</h1>
-						<p style="text-align: center;">
-							Welkom bij <strong>Pet Supplies Web Store</strong>, de plek op
-							het net om op een snelle en simpele manier de benodigde spullen
-							voor onze dieren vrienden te kopen
-						</p>
+						<p style="text-align: center;">{{'HEADER' | translate}}</p>
 					</div>
 				</div>
-
 				<h1></h1>
 				<!--  >ul class="icons">
 							<li><a href="#" class="icon style2 fa-twitter"><span class="label">Twitter</span></a></li>
@@ -80,81 +42,23 @@
 							<li><a href="#" class="icon style2 fa-envelope-o"><span class="label">Email</span></a></li>
 						</ul-->
 			</header>
-
-			<!-- Main -->
+			<!-- View -->
 			<section id="main">
-				<div id="viewWrapper" data-ng-controller="viewCtrl" data-ng-view class="view">
-
-					<!-- Thumbnails -->
-					<section class="thumbnails">
-
-
-
-						<div class="row" data-ng-controller="productCtrl">
-
-							<div class="col-xs-12 col-sm-6 col-md-3"
-								ng-repeat="x in Products">
-								<div class="col-item">
-									<div class="post-img-content">
-										<img src="{{x.picture}}" class="img-responsive"
-											style="height: 200px;"> <span class="post-title">
-										</span>
-									</div>
-									<div class="info">
-										<div class="row">
-											<div class="price col-md-12">
-												<h5>{{x.name}}</h5>
-												<p>{{x.description}}</p>
-												<h5 class="price-text-color">&euro; {{x.price}}</h5>
-											</div>
-
-										</div>
-										<div class="separator">
-											<p class="btn-add">
-												<i class="fa fa-shopping-cart"></i><a href="#"
-													data-ng-click="postProductToCart(x)" class="hidden-sm">Toevoegen
-													aan winkelwagen</a>
-											</p>
-
-										</div>
-										<div class="clearfix"></div>
-									</div>
-								</div>
-							</div>
-
-
-
-						</div>
-
-					</section>
-
+				<div id="viewWrapper" data-ng-controller="viewCtrl">
+					<div data-ng-view class="view"></div>
 				</div>
 			</section>
-
 			<!-- Footer -->
 			<footer id="footer">
 
 				<div class="container">
 					<p style="text-align: center;">
-						Voor aankoop, stuur een mail naar de benedenstaande email adres
-						met de producten en hun aantal. <br></br> Gelieve uw contact
-						informatie ook te vermelden. <br></br> <a
+						{{'FOOTER1' | translate}} <br></br> {{'FOOTER2' | translate}} <a
 							href="mailto:info@petsupplies.com">info@petsupplies.com</a>
 					</p>
-
 				</div>
-
-
-
 			</footer>
-
 		</div>
-
 	</div>
-
-
-
 </body>
-
-
 </html>

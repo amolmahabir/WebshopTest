@@ -3,6 +3,8 @@ package org.jboss.tools.webshop.model;
 import javax.persistence.Entity;
 import java.io.Serializable;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Column;
@@ -12,13 +14,15 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
 @XmlRootElement
+@Table(name="CartItem", schema="webshop")
 public class CartItem implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	@Id
+	
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id", updatable = false, nullable = false)
-	private Long id;
+	@Column(name = "cartitem_id", updatable = false, nullable = false)
+	private Long cartitem_id;
 	@Version
 	@Column(name = "version")
 	private int version;
@@ -32,6 +36,9 @@ public class CartItem implements Serializable {
 
 	@Column
 	private String picture;
+	
+	@Column
+	private String category;
 	
 	@Column
 	private double price;
@@ -56,11 +63,11 @@ public class CartItem implements Serializable {
 	}
 
 	public Long getId() {
-		return this.id;
+		return this.cartitem_id;
 	}
 
 	public void setId(final Long id) {
-		this.id = id;
+		this.cartitem_id = id;
 	}
 
 	public int getVersion() {
@@ -69,6 +76,14 @@ public class CartItem implements Serializable {
 
 	public void setVersion(final int version) {
 		this.version = version;
+	}
+	
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
 	}
 
 	@Override
@@ -80,8 +95,8 @@ public class CartItem implements Serializable {
 			return false;
 		}
 		CartItem other = (CartItem) obj;
-		if (id != null) {
-			if (!id.equals(other.id)) {
+		if (cartitem_id != null) {
+			if (!cartitem_id.equals(other.cartitem_id)) {
 				return false;
 			}
 		}
@@ -92,7 +107,7 @@ public class CartItem implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((cartitem_id == null) ? 0 : cartitem_id.hashCode());
 		return result;
 	}
 

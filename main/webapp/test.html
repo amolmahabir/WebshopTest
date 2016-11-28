@@ -7,6 +7,8 @@
 <body>
 	<section class="thumbnails">
 		<div data-ng-controller="cartCtrl">
+		
+
 			<table style="width: 100%">
 				<tr>
 					<th></th>
@@ -18,7 +20,7 @@
 				<tr data-ng-repeat="x in Products">
 					<td><img src="{{x.picture}}"
 						style="width: 100px; height: 100px;" alt=""></td>
-					<td>{{x.name | translate}}</td>
+					<td>{{x.name}}</td>
 					<td>
 						<form name="myForm" data-ng-controller="numberInputCtrl" action="">
 							<label>Aantal: <input type="number" name="input"
@@ -28,15 +30,22 @@
 								<span class="error" data-ng-show="myForm.input.$error.pattern">
 									Not a valid number!</span>
 							</div>
+
 						</form>
 					</td>
-					<td>{{costs(x) | currency:'€'}}</td>
+					<td>{{costs(x) | currency:'$'}}</td>
 					<td><button data-ng-click="deleteProduct(x)">Verwijderen</button></td>
 				</tr>
 			</table>
-			<p>Totaal bedrag: {{totalPrice() | currency:'€'}}</p>
+			<p>Totaal bedrag: {{totalPrice() | currency:'$'}}</p>
+
+
+
 		</div>
+
+
 	</section>
-	<button onclick="location.href='http://localhost:8080/Webshop/index2.html#/signup'" type="button">Bestellen</button>
+
+
 </body>
 </html>

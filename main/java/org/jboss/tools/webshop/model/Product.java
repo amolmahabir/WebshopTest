@@ -3,6 +3,7 @@ package org.jboss.tools.webshop.model;
 import javax.persistence.Entity;
 import java.io.Serializable;
 import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Column;
@@ -10,13 +11,14 @@ import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
 
 @Entity
+@Table(name="Product", schema="webshop")
 public class Product implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id", updatable = false, nullable = false)
-	private Long id;
+	private Long product_id;
 	@Version
 	@Column(name = "version")
 	private int version;
@@ -30,6 +32,9 @@ public class Product implements Serializable {
 
 	@Column
 	private String picture;
+	
+	@Column
+	private String category;
 	
 	@Column
 	private double price;
@@ -54,11 +59,11 @@ public class Product implements Serializable {
 	}
 
 	public Long getId() {
-		return this.id;
+		return this.product_id;
 	}
 
 	public void setId(final Long id) {
-		this.id = id;
+		this.product_id = id;
 	}
 
 	public int getVersion() {
@@ -78,8 +83,8 @@ public class Product implements Serializable {
 			return false;
 		}
 		Product other = (Product) obj;
-		if (id != null) {
-			if (!id.equals(other.id)) {
+		if (product_id != null) {
+			if (!product_id.equals(other.product_id)) {
 				return false;
 			}
 		}
@@ -90,7 +95,7 @@ public class Product implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((product_id == null) ? 0 : product_id.hashCode());
 		return result;
 	}
 
@@ -116,6 +121,14 @@ public class Product implements Serializable {
 
 	public void setPicture(String picture) {
 		this.picture = picture;
+	}
+	
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
 	}
 
 	@Override
